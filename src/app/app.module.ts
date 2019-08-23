@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import { LoginComponent } from './pages/login/login.component';
 import { SignupComponent } from './pages/signup/signup.component';
@@ -35,6 +36,7 @@ import { ChatroomWindowComponent } from './components/chatroom-window/chatroom-w
     BrowserModule,
     BsDropdownModule.forRoot(),
     ReactiveFormsModule,
+    FormsModule,
     AppRoutingModule
   ],
   providers: [],

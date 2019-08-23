@@ -1,1 +1,9 @@
-<p>chat-input works!</p>
+<div class="new-message-wrapper">
+    <div class="input-group">
+        <input [(ngModel)]="newMessageText" type="text" class="form-control" placeholder="Message..."
+            (keyup.enter)="submit(newMessage.value)" #newMessage>
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="submit" (click)="submit(newMessage.value)">Send</button>
+        </div>
+    </div>
+</div>
