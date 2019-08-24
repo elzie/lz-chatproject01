@@ -1,6 +1,6 @@
 <div class="h-100 d-flex flex-column chat-window">
     <app-chatroom-title-bar [title]="'Doggo Facts'"></app-chatroom-title-bar>
-    <div class="message-wrapper h-100">
+    <div class="message-wrapper h-100" #scrollMe>
         <ng-container *ngFor="let message of dummyData">
             <app-chat-message [message]="message"></app-chat-message>
         </ng-container>
