@@ -1,19 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Alert } from 'src/app/classes/alert';
 import { AlertType } from 'src/app/enums/alert-type.enum';
 import { AlertService } from 'src/app/services/alert.service';
+import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
+import { LoadingService } from 'src/app/services/loading.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss']
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent implements OnInit, OnDestroy {
 
   public signupForm: FormGroup;
+  private subscriptions: Subscription[] = [];
 
-  constructor(private fb: FormBuilder, private AlertService: AlertService) {
+  constructor(
+    private fb: FormBuilder,
+    private alertService: AlertService,
+    private auth: AuthService,
+    private loadingService: LoadingService,
+    private router: Router
+  ) {
     this.createForm();
   }
 
@@ -33,10 +44,23 @@ export class SignupComponent implements OnInit {
     if (this.signupForm.valid) {
       // TODO Call the auth Service
       const { firstname, lastname, username, email, password } = this.signupForm.value;
-      console.log(`Name: ${firstname} ${lastname}, Username: ${username}, Email: ${email}, Password: ${password}`);
+      // console.log(`Name: ${firstname} ${lastname}, Username: ${username}, Email: ${email}, Password: ${password}`);
+      this.subscriptions.push(
+        this.auth.signup(firstname, lastname, username, email, password).subscribe(
+          success => {
+            if (success) {
+              this.router.navigate(['/chatrooms']);
+            }
+            this.loadingService.isLoading.next(false);
+          }
+        )
+      );
     } else {
       const failedSignupAlert = new Alert('Please enter a valid email, username, name and password.', AlertType.Danger);
-      this.AlertService.alerts.next(failedSignupAlert);
+      this.alertService.alerts.next(failedSignupAlert);
     }
+  }
+  ngOnDestroy() {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 }

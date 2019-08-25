@@ -1,13 +1,21 @@
 // Modules
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AlertModule } from 'ngx-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 
+// External Modules
+import { AlertModule } from 'ngx-bootstrap';
+import { NgxLoadingModule } from 'ngx-loading';
+
 // Services
+import { AuthService } from './services/auth.service';
 import { AlertService } from './services/alert.service';
+import { LoadingService } from './services/loading.service';
+
+// Guards
+import { AuthGuard } from './guards/auth.guard';
 
 // Components
 import { AppComponent } from './app.component';
@@ -39,10 +47,14 @@ import { ChatroomWindowComponent } from './components/chatroom-window/chatroom-w
     AlertModule.forRoot(),
     ReactiveFormsModule,
     FormsModule,
+    NgxLoadingModule,
     AppRoutingModule
   ],
   providers: [
-    AlertService
+    AlertService,
+    LoadingService,
+    AuthService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
