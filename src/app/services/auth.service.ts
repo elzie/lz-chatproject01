@@ -18,6 +18,7 @@ import 'rxjs/add/Observable/fromPromise';
 export class AuthService {
 
   public currentUser: Observable<User | null>;
+  public currentUserSnapshot: User | null;
 
   constructor(
     private router: Router,
@@ -34,6 +35,7 @@ export class AuthService {
           return Observable.of(null);
         }
       });
+    this.setCurrentUserSnapshot();
   }
   public signup(
     firstName: string,
@@ -77,8 +79,13 @@ export class AuthService {
   }
 
   public logout(): void {
-    // TODO Call firebase logout function
-    this.router.navigate(['/login']);
-    this.alertService.alerts.next(new Alert('You have been signed out.'));
+    this.afAuth.auth.signOut().then(() => {
+      this.router.navigate(['/login']);
+      this.alertService.alerts.next(new Alert('You have been signed out.'));
+    });
+  }
+
+  private setCurrentUserSnapshot(): void {
+    this.currentUser.subscribe(user => this.currentUserSnapshot = user);
   }
 }

@@ -18,6 +18,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AuthService } from './services/auth.service';
 import { AlertService } from './services/alert.service';
 import { LoadingService } from './services/loading.service';
+import { ChatroomService } from './services/chatroom.service';
 
 // Guards
 import { AuthGuard } from './guards/auth.guard';
@@ -64,7 +65,8 @@ import { environment } from 'src/environments/environment';
     AlertService,
     LoadingService,
     AuthService,
-    AuthGuard
+    AuthGuard,
+    ChatroomService
   ],
   bootstrap: [AppComponent]
 })
