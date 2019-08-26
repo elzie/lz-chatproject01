@@ -1,3 +1,4 @@
+import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Alert } from 'src/app/classes/alert';
@@ -6,7 +7,6 @@ import { AlertService } from 'src/app/services/alert.service';
 import { LoadingService } from 'src/app/services/loading.service';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
-import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -50,19 +50,24 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.auth.login(email, password).subscribe(success => {
           if (success) {
             this.router.navigateByUrl(this.returnUrl);
+          } else {
+            this.displayFailedLogin();
           }
           this.loadingService.isLoading.next(false);
         })
       );
       // console.log(`Email: ${email}, Password: ${password}`);
     } else {
-      const failedLoginAlert = new Alert('Your Email or Password were invalid - please try again!', AlertType.Danger);
-      this.loadingService.isLoading.next(false);
-      this.alertService.alerts.next(failedLoginAlert);
 
+      this.loadingService.isLoading.next(false);
+      this.displayFailedLogin();
     }
   }
   ngOnDestroy() {
     this.subscriptions.forEach(sub => sub.unsubscribe());
+  }
+  private displayFailedLogin(): void {
+    const failedLoginAlert = new Alert('Your Email or Password were invalid - please try again!', AlertType.Danger);
+    this.alertService.alerts.next(failedLoginAlert);
   }
 }
