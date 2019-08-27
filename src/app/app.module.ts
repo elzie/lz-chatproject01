@@ -1,6 +1,7 @@
 // Modules
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
@@ -34,9 +35,9 @@ import { ChatroomListComponent } from './components/chatroom-list/chatroom-list.
 import { ChatroomTitleBarComponent } from './components/chatroom-title-bar/chatroom-title-bar.component';
 import { ChatMessageComponent } from './components/chat-message/chat-message.component';
 import { ChatroomWindowComponent } from './components/chatroom-window/chatroom-window.component';
-import { environment } from 'src/environments/environment';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { EditProfileComponent } from './pages/edit-profile/edit-profile.component';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { EditProfileComponent } from './pages/edit-profile/edit-profile.componen
     LoadingService,
     AuthService,
     AuthGuard,
+    DatePipe,
     ChatroomService
   ],
   bootstrap: [AppComponent]

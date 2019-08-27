@@ -12,50 +12,11 @@ import { LoadingService } from 'src/app/services/loading.service';
 export class ChatroomWindowComponent implements OnInit, AfterViewChecked, OnDestroy {
 
   private subscriptions: Subscription[] = [];
-  public chatroom: Observable<any>;
-  public messages: Observable<any>;
+  public chatroom: Observable<[any]> | null;
+  public messages: Observable<any> | null;
 
   // Scroll to bottom chat-like feature
   @ViewChild('scrollWindow', { static: false }) private myScrollContainer: ElementRef;
-
-  // Replace with firebase data :3
-  // public dummyData = [
-  //   {
-  //     message: 'test',
-  //     createdAt: new Date(),
-  //     sender: {
-  //       firstName: 'Sally',
-  //       lastName: 'Jones',
-  //       photoUrl: 'http://via.placeholder.com/50x50'
-  //     }
-  //   },
-  //   {
-  //     message: 'asdasdasdfasfasdasd',
-  //     createdAt: new Date(),
-  //     sender: {
-  //       firstName: 'Kate',
-  //       lastName: 'Moss',
-  //       photoUrl: 'http://via.placeholder.com/50x50'
-  //     }
-  //   }, {
-  //     message: 'dlkfgjdjfgfsdsdf sdf dsfsd sfsdf',
-  //     createdAt: new Date(),
-  //     sender: {
-  //       firstName: 'Spider',
-  //       lastName: 'man',
-  //       photoUrl: 'http://via.placeholder.com/50x50'
-  //     }
-  //   },
-  //   {
-  //     message: 'Dooooooooooooom!',
-  //     createdAt: new Date(),
-  //     sender: {
-  //       firstName: 'Dr',
-  //       lastName: 'Doom',
-  //       photoUrl: 'http://via.placeholder.com/50x50'
-  //     }
-  //   },
-  // ];
 
   constructor(
     private route: ActivatedRoute,
@@ -65,6 +26,7 @@ export class ChatroomWindowComponent implements OnInit, AfterViewChecked, OnDest
     this.subscriptions.push(
       this.chatroomService.selectedChatroom.subscribe(chatroom => {
         this.chatroom = chatroom;
+        console.log(chatroom);
         // this.loadingService.isLoading.next(false);
       })
     );

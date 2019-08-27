@@ -4,7 +4,7 @@
         <div class="col-xs-12 col-sm-8 col-md-6" *ngIf="currentUser else noPhoto">
             <img *ngIf="!downloadUrl" [src]="currentUser.photoUrl" alt="profile-pic"
                 class="rounded-circle mx-auto d-block profile-pic">
-            <img *ngIf="downloadUrl && downloadUrl.length > 0" [src]="downloadUrl" alt="profile-pic"
+            <img *ngIf="downloadUrl && (downloadUrl | async)?.length > 0" [src]="downloadUrl" alt="profile-pic"
                 class="rounded-circle mx-auto d-block profile-pic">
         </div>
     </div>

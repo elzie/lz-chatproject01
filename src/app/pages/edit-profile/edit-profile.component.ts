@@ -1,17 +1,16 @@
+import { User } from './../../interfaces/user';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { LoadingService } from 'src/app/services/loading.service';
-import { AuthService } from 'src/app/services/auth.service';
 import { Subscription, Observable } from 'rxjs';
-import { AlertService } from 'src/app/services/alert.service';
-import { User } from 'src/app/interfaces/user';
+import { LoadingService } from './../../services/loading.service';
+import { AuthService } from './../../services/auth.service';
+import { AlertService } from './../../services/alert.service';
 import { finalize } from 'rxjs/operators';
-import { Alert } from 'src/app/classes/alert';
-import { AlertType } from 'src/app/enums/alert-type.enum';
+import { Alert } from './../../classes/alert';
+import { AlertType } from './../../enums/alert-type.enum';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
-import { storage } from 'firebase';
 
 @Component({
   selector: 'app-edit-profile',
@@ -24,7 +23,7 @@ export class EditProfileComponent implements OnInit, OnDestroy {
   public userId: string = '';
   private subsubscriptions: Subscription[] = [];
   public uploadPercent: number = 0;
-  public downloadUrl: Observable<any> | null;
+  public downloadUrl: Observable<any[]> | null;
   public photo: string = null;
 
   constructor(
@@ -74,10 +73,13 @@ export class EditProfileComponent implements OnInit, OnDestroy {
     this.subsubscriptions.push(
       task.snapshotChanges().pipe(finalize(() =>
         ref.getDownloadURL().subscribe(downloadUrl => {
-          // console.log('Make the update with this URL:' + downloadUrl)
+
+          console.log('downloadURL:' + downloadUrl);
           this.downloadUrl = downloadUrl;
+
         }
         ))).subscribe()
+
       // Had a few issues going from downloadURL to getDownloadURL - but all ok
     );
   }
@@ -90,6 +92,7 @@ export class EditProfileComponent implements OnInit, OnDestroy {
     }
     const user = Object.assign({}, this.currentUser, { photoUrl: photo });
     const userRef: AngularFirestoreDocument<User> = this.db.doc(`users/${user.id}`);
+
     userRef.set(user);
     this.alertService.alerts.next(new Alert('Your profile was successfully upated!', AlertType.Success));
     this.location.back();
@@ -99,3 +102,4 @@ export class EditProfileComponent implements OnInit, OnDestroy {
     this.subsubscriptions.forEach(sub => sub.unsubscribe);
   }
 }
+
