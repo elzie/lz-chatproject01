@@ -34,6 +34,7 @@ import { ChatInputComponent } from './components/chat-input/chat-input.component
 import { ChatroomListComponent } from './components/chatroom-list/chatroom-list.component';
 import { ChatroomTitleBarComponent } from './components/chatroom-title-bar/chatroom-title-bar.component';
 import { ChatMessageComponent } from './components/chat-message/chat-message.component';
+import { ChatroomUserListComponent } from './components/chatroom-user-list/chatroom-user-list.component';
 import { ChatroomWindowComponent } from './components/chatroom-window/chatroom-window.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { EditProfileComponent } from './pages/edit-profile/edit-profile.component';
@@ -51,8 +52,9 @@ import { environment } from 'src/environments/environment';
     ChatroomTitleBarComponent,
     ChatMessageComponent,
     ChatroomWindowComponent,
+    ChatroomUserListComponent,
     ProfileComponent,
-    EditProfileComponent
+    EditProfileComponent,
   ],
   imports: [
     BrowserModule,

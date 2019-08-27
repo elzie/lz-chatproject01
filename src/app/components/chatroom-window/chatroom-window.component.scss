@@ -1,7 +1,44 @@
 @import '../../../styles/variables';
 
-.message-wrapper {
+.chat-wrapper-left {
+  height: 100%;
+  width: 80%;
+  float: left !important;
+}
+
+.webcam-layout-wrapper {
+  border: 1px solid hotpink;
+
+  .webcam-feed-box {
+    height: 160px;
+    opacity: .4;
+  }
+}
+
+.main-chat-window {
+  height: calc(100% - 40px);
+  width: 100%;
   overflow-y: scroll;
+  border: 1px solid darkgreen;
+  min-height: 300px;
+}
+
+.chatroom-user-list-container {
+  border: 1px solid blue;
+  width: 20%;
+  height: 360px;
+  overflow-y: scroll;
+}
+
+.text-chat-wrapper {
+  height: 360px;
+
+  .chatroom-list-wrapper {
+    margin-bottom: 30px;
+    height: 360px;
+
+    .chatroom-list {}
+  }
 }
 
 .select-room {
