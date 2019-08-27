@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ChatroomService } from 'src/app/services/chatroom.service';
 
 @Component({
   selector: 'app-chatroom-title-bar',
@@ -9,7 +10,9 @@ export class ChatroomTitleBarComponent implements OnInit {
 
   @Input() title: string;
 
-  constructor() { }
+  constructor(
+    public chatroomService: ChatroomService
+  ) { }
 
   ngOnInit() {
   }

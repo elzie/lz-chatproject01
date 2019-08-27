@@ -1,8 +1,9 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild, ElementRef, AfterViewChecked, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
-import { ChatroomService } from 'src/app/services/chatroom.service';
-import { LoadingService } from 'src/app/services/loading.service';
+import { ChatroomService } from './../../services/chatroom.service';
+import { LoadingService } from './../../services/loading.service';
+import { Chatroom } from './../../interfaces/chatroom';
 
 @Component({
   selector: 'app-chatroom-window',
@@ -12,8 +13,8 @@ import { LoadingService } from 'src/app/services/loading.service';
 export class ChatroomWindowComponent implements OnInit, AfterViewChecked, OnDestroy {
 
   private subscriptions: Subscription[] = [];
-  public chatroom: Observable<[any]> | null;
-  public messages: Observable<any> | null;
+  public chatroom: Chatroom;
+  public messages: Observable<any>;
 
   // Scroll to bottom chat-like feature
   @ViewChild('scrollWindow', { static: false }) private myScrollContainer: ElementRef;
