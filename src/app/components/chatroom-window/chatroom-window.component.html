@@ -10,7 +10,7 @@
 
 <ng-template #chatMessages>
     <app-chatroom-title-bar [title]="chatroom.name"></app-chatroom-title-bar>
-    <div class="message-wrapper h-100" #scrollMe>
+    <div class="message-wrapper h-100" #scrollWindow>
         <ng-container *ngFor="let message of messages">
             <app-chat-message [message]="message"></app-chat-message>
         </ng-container>

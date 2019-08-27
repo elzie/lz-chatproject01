@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from '../classes/user';
+import { User } from '../interfaces/user';
 import { Alert } from './../classes/alert';
 import { AlertType } from './../enums/alert-type.enum';
 import { AlertService } from './alert.service';
@@ -56,7 +56,9 @@ export class AuthService {
             firstName,
             lastName,
             photoUrl: 'https://firebasestorage.googleapis.com/v0/b/lz-chatproject.appspot.com/o/default_profile_pic.png?alt=media&token=0a21e088-6a37-41df-a6ef-0831322a6d44',
-            theme: 'default'
+            theme: 'default',
+            quote: 'quote',
+            bio: 'Biography'
           };
           // Actually update db
           userRef.set(updatedUser);

@@ -6,9 +6,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 
 // External Modules
-import { AlertModule } from 'ngx-bootstrap';
+import { AlertModule, BsDropdownModule } from 'ngx-bootstrap';
 import { NgxLoadingModule } from 'ngx-loading';
-import * as firebase from "firebase/app";
+
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorageModule } from 'angularfire2/storage';
@@ -35,6 +35,8 @@ import { ChatroomTitleBarComponent } from './components/chatroom-title-bar/chatr
 import { ChatMessageComponent } from './components/chat-message/chat-message.component';
 import { ChatroomWindowComponent } from './components/chatroom-window/chatroom-window.component';
 import { environment } from 'src/environments/environment';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { EditProfileComponent } from './pages/edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,9 @@ import { environment } from 'src/environments/environment';
     ChatroomListComponent,
     ChatroomTitleBarComponent,
     ChatMessageComponent,
-    ChatroomWindowComponent
+    ChatroomWindowComponent,
+    ProfileComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -56,6 +60,7 @@ import { environment } from 'src/environments/environment';
     ReactiveFormsModule,
     FormsModule,
     NgxLoadingModule,
+    BsDropdownModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireStorageModule,
