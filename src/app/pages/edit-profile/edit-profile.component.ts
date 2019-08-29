@@ -73,13 +73,9 @@ export class EditProfileComponent implements OnInit, OnDestroy {
     this.subsubscriptions.push(
       task.snapshotChanges().pipe(finalize(() =>
         ref.getDownloadURL().subscribe(downloadUrl => {
-
-          console.log('downloadURL:' + downloadUrl);
+          // console.log('downloadURL:' + downloadUrl);
           this.downloadUrl = downloadUrl;
-
-        }
-        ))).subscribe()
-
+        }))).subscribe()
       // Had a few issues going from downloadURL to getDownloadURL - but all ok
     );
   }
@@ -92,7 +88,6 @@ export class EditProfileComponent implements OnInit, OnDestroy {
     }
     const user = Object.assign({}, this.currentUser, { photoUrl: photo });
     const userRef: AngularFirestoreDocument<User> = this.db.doc(`users/${user.id}`);
-
     userRef.set(user);
     this.alertService.alerts.next(new Alert('Your profile was successfully upated!', AlertType.Success));
     this.location.back();

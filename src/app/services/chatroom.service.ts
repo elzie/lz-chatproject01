@@ -15,6 +15,7 @@ export class ChatroomService {
   public changeChatroom: BehaviorSubject<string | null> = new BehaviorSubject(null);
   public selectedChatroom: Observable<any>;
   public selectedChatroomMessages: Observable<any>;
+  public createChatroom: Observable<any>;
 
   constructor(
     private db: AngularFirestore,
@@ -23,15 +24,16 @@ export class ChatroomService {
   ) {
     this.selectedChatroom = this.changeChatroom.switchMap(chatroomId => {
       if (chatroomId) {
-        // this.loadingService.isLoading.next(true);
+        // Load selected chatroom.
         return db.doc(`chatrooms/${chatroomId}`).valueChanges();
       }
       return Observable.of(null);
     });
 
+
     this.selectedChatroomMessages = this.changeChatroom.switchMap(chatroomId => {
       if (chatroomId) {
-        // this.loadingService.isLoading.next(true);
+        // Load and show messages in chatroom
         return db.collection(`chatrooms/${chatroomId}/messages`, ref => {
           return ref.orderBy('createdAt', 'desc').limit(50);
         }).valueChanges()
@@ -51,4 +53,10 @@ export class ChatroomService {
     // Add message to database
     this.db.collection(`chatrooms/${chatroomId}/messages`).add(message);
   }
+  public createAndJoinChatroom(chatroomname: string): void {
+    // TO DO Call firebase an make new chatroom.
+    console.log('chatroomname', chatroomname);
+  }
+
+
 }

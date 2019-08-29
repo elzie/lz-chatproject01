@@ -2,16 +2,28 @@
     <ng-container *ngIf="!chatroom else chatMessages">
         <div class="select-room h-100 w-100 d-flex justify-content-center align-items-center">
             <div class="row">
-                <div class="select-room-message col-12">
-                    Please select a Chatroom to join :)
+
+                <div class="col-12">
+                    <form [formGroup]="newChatForm" novalidate>
+
+                        <div class="form-group createNewChatroom">
+                            <input type="chatroomname" class="form-control" id="chatroomname-input"
+                                placeholder="Enter new chatroom name.." formControlName="chatroomname">
+                            <button type="submit" (click)="submitCreateNewChatroom()">Create a new
+                                Chatroom (work in progress)</button>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="w-100 justify-content-center align-items-center text-center"></div>
+                <div class="select-room-message col-12 text-center">
+                    or <br>
+                    Select a Chatroom to join :)
                 </div>
                 <div class="col-12 chatroom-list-wrapper">
                     <app-chatroom-list class="chatroom-list"></app-chatroom-list>
                 </div>
-                <div class="col-12">
-                    <div class="w-100 justify-content-center align-items-center text-center">or</div>
-                    <button>Create a new Chatroom</button>
-                </div>
+
             </div>
         </div>
     </ng-container>
