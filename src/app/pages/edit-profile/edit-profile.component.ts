@@ -9,8 +9,8 @@ import { AlertService } from './../../services/alert.service';
 import { finalize } from 'rxjs/operators';
 import { Alert } from './../../classes/alert';
 import { AlertType } from './../../enums/alert-type.enum';
-import { AngularFireStorage } from 'angularfire2/storage';
-import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-edit-profile',
@@ -73,9 +73,13 @@ export class EditProfileComponent implements OnInit, OnDestroy {
     this.subsubscriptions.push(
       task.snapshotChanges().pipe(finalize(() =>
         ref.getDownloadURL().subscribe(downloadUrl => {
-          // console.log('downloadURL:' + downloadUrl);
+
+          console.log('downloadURL:' + downloadUrl);
           this.downloadUrl = downloadUrl;
-        }))).subscribe()
+
+        }
+        ))).subscribe()
+
       // Had a few issues going from downloadURL to getDownloadURL - but all ok
     );
   }
@@ -88,6 +92,7 @@ export class EditProfileComponent implements OnInit, OnDestroy {
     }
     const user = Object.assign({}, this.currentUser, { photoUrl: photo });
     const userRef: AngularFirestoreDocument<User> = this.db.doc(`users/${user.id}`);
+
     userRef.set(user);
     this.alertService.alerts.next(new Alert('Your profile was successfully upated!', AlertType.Success));
     this.location.back();

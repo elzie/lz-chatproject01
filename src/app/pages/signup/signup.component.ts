@@ -21,7 +21,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private alertService: AlertService,
-    private authService: AuthService,
+    private auth: AuthService,
     private loadingService: LoadingService,
     private router: Router
   ) {
@@ -42,14 +42,14 @@ export class SignupComponent implements OnInit, OnDestroy {
 
   public submit(): void {
     if (this.signupForm.valid) {
-      // Call the auth Service
+      // TODO Call the auth Service
       const { firstname, lastname, username, email, password } = this.signupForm.value;
-      // console.log(`Name: ${firstname} ${lastname}, Username: ${username}, Email: ${email}, Password: ${password}`);
+      console.log(`Name: ${firstname} ${lastname}, Username: ${username}, Email: ${email}, Password: ${password}`);
       this.subscriptions.push(
-        this.authService.signup(firstname, lastname, username, email, password).subscribe(
+        this.auth.signup(firstname, lastname, username, email, password).subscribe(
           success => {
             if (success) {
-              // console.log('actually success... ');
+              console.log('actually success... ');
               this.router.navigate(['/chatrooms']);
             } else {
               const failedSignupAlert = new Alert('There was a problem signing up. Plz try again!', AlertType.Danger);

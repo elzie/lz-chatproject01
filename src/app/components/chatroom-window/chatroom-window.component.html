@@ -1,29 +1,8 @@
 <div class="h-100 d-flex flex-column chat-window">
     <ng-container *ngIf="!chatroom else chatMessages">
         <div class="select-room h-100 w-100 d-flex justify-content-center align-items-center">
-            <div class="row">
-
-                <div class="col-12">
-                    <form [formGroup]="newChatForm" novalidate>
-
-                        <div class="form-group createNewChatroom">
-                            <input type="chatroomname" class="form-control" id="chatroomname-input"
-                                placeholder="Enter new chatroom name.." formControlName="chatroomname">
-                            <button type="submit" (click)="submitCreateNewChatroom()">Create a new
-                                Chatroom (work in progress)</button>
-                        </div>
-
-                    </form>
-                </div>
-                <div class="w-100 justify-content-center align-items-center text-center"></div>
-                <div class="select-room-message col-12 text-center">
-                    or <br>
-                    Select a Chatroom to join :)
-                </div>
-                <div class="col-12 chatroom-list-wrapper">
-                    <app-chatroom-list class="chatroom-list"></app-chatroom-list>
-                </div>
-
+            <div class="select-room-message">
+                Please select a chat room to join, in the menu to the left. :)
             </div>
         </div>
     </ng-container>
@@ -31,47 +10,19 @@
 
 <ng-template #chatMessages>
     <app-chatroom-title-bar [title]="chatroom.name"></app-chatroom-title-bar>
-    <div class="w-100 webcam-layout-wrapper container-fluid">
-        <!--Mock cam layout for looks-->
-        <div class="row">
-            <div class="col bg-success webcam-feed-box">Cam 1 of 18</div>
-            <div class="col bg-warning webcam-feed-box">Cam 2 of 18</div>
-            <div class="col bg-success webcam-feed-box">Cam 3 of 18</div>
-            <div class="col bg-warning webcam-feed-box">Cam 4 of 18</div>
-            <div class="col bg-success webcam-feed-box">Cam 5 of 18</div>
-            <div class="col bg-warning webcam-feed-box">Cam 6 of 18</div>
-        </div>
-        <div class="row">
-            <div class="col bg-warning webcam-feed-box">Cam 7 of 18</div>
-            <div class="col bg-success webcam-feed-box">Cam 8 of 18</div>
-            <div class="col bg-warning webcam-feed-box">Cam 9 of 18</div>
-            <div class="col bg-success webcam-feed-box">Cam 10 of 18</div>
-            <div class="col bg-warning webcam-feed-box">Cam 11 of 18</div>
-            <div class="col bg-success webcam-feed-box">Cam 12 of 18</div>
-        </div>
-        <div class="row">
-            <div class="col bg-success webcam-feed-box">Cam 13 of 18</div>
-            <div class="col bg-warning webcam-feed-box">Cam 14 of 18</div>
-            <div class="col bg-success webcam-feed-box">Cam 15 of 18</div>
-            <div class="col bg-warning webcam-feed-box">Cam 16 of 18</div>
-            <div class="col bg-success webcam-feed-box">Cam 17 of 18</div>
-            <div class="col bg-warning webcam-feed-box">Cam 18 of 18</div>
-        </div>
-        <!--Mock cam layout for looks-->
-
+    <div class="message-wrapper h-100" #scrollWindow>
+        <ng-container *ngIf="messages else noMessages"></ng-container>
+        <ng-container *ngFor="let message of messages">
+            <app-chat-message [message]="message"></app-chat-message>
+        </ng-container>
     </div>
-    <div class="w-100 text-chat-wrapper">
-        <div class="chat-wrapper-left">
-            <div class="main-chat-window float-left" #scrollWindow>
-                <ng-container *ngFor="let message of messages">
-                    <app-chat-message [message]="message"></app-chat-message>
-                </ng-container>
-            </div>
-            <app-chat-input></app-chat-input>
-        </div>
-        <div class="float-right chatroom-user-list-container">
-            <app-chatroom-user-list></app-chatroom-user-list>
-        </div>
+    <app-chat-input></app-chat-input>
+</ng-template>
 
+<ng-template #noMessages>
+    <div class="select-room h-100 w-100 d-flex justify-content-center align-items-center">
+        <div class="select-room-message">
+            There are no messages yet.
+        </div>
     </div>
 </ng-template>

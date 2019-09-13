@@ -1,9 +1,11 @@
 @import '../../../styles/variables.scss';
 
-
-.nav-item,
 span {
   color: #ffffff;
+}
+
+.nav-item {
+  color: $light-grey;
 }
 
 a {

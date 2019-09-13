@@ -1,44 +1,7 @@
 @import '../../../styles/variables';
 
-.chat-wrapper-left {
-  height: 100%;
-  width: 80%;
-  float: left !important;
-}
-
-.webcam-layout-wrapper {
-  border: 1px solid hotpink;
-
-  .webcam-feed-box {
-    height: 160px;
-    opacity: .4;
-  }
-}
-
-.main-chat-window {
-  height: calc(100% - 40px);
-  width: 100%;
+.message-wrapper {
   overflow-y: scroll;
-  border: 1px solid darkgreen;
-  min-height: 200px;
-}
-
-.chatroom-user-list-container {
-  border: 1px solid blue;
-  width: 20%;
-  height: 100%;
-  overflow-y: scroll;
-}
-
-.text-chat-wrapper {
-  height: 360px;
-
-  .chatroom-list-wrapper {
-    margin-bottom: 30px;
-    height: 360px;
-
-    .chatroom-list {}
-  }
 }
 
 .select-room {
@@ -46,10 +9,11 @@
     width: 45%;
     height: 15%;
     margin-bottom: 10%;
-    border: 2px solid $gold;
+    border: 1px solid $light-grey;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1.2em;
+    box-shadow: 0 5px 10px $light-grey;
   }
 }

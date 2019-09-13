@@ -2,8 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoadingService } from 'src/app/services/loading.service';
 import { ActivatedRoute } from '@angular/router';
-import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
-import { User } from './../../interfaces/user';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { User } from 'src/app/interfaces/user';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -18,7 +18,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
 
   constructor(
-    private authService: AuthService,
+    private auth: AuthService,
     private loadingService: LoadingService,
     private route: ActivatedRoute,
     private db: AngularFirestore
@@ -28,8 +28,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscriptions.push(
-      // Load Current User
-      this.authService.currentUser.subscribe(user => {
+      this.auth.currentUser.subscribe(user => {
         this.currentUser = user;
         this.loadingService.isLoading.next(false);
       })

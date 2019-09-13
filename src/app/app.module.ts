@@ -10,10 +10,10 @@ import { FormsModule } from '@angular/forms';
 import { AlertModule, BsDropdownModule } from 'ngx-bootstrap';
 import { NgxLoadingModule } from 'ngx-loading';
 
-import { AngularFireModule } from 'angularfire2';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
-import { AngularFireStorageModule } from 'angularfire2/storage';
-import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 // Services
 import { AuthService } from './services/auth.service';
@@ -34,7 +34,6 @@ import { ChatInputComponent } from './components/chat-input/chat-input.component
 import { ChatroomListComponent } from './components/chatroom-list/chatroom-list.component';
 import { ChatroomTitleBarComponent } from './components/chatroom-title-bar/chatroom-title-bar.component';
 import { ChatMessageComponent } from './components/chat-message/chat-message.component';
-import { ChatroomUserListComponent } from './components/chatroom-user-list/chatroom-user-list.component';
 import { ChatroomWindowComponent } from './components/chatroom-window/chatroom-window.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { EditProfileComponent } from './pages/edit-profile/edit-profile.component';
@@ -52,9 +51,8 @@ import { environment } from 'src/environments/environment';
     ChatroomTitleBarComponent,
     ChatMessageComponent,
     ChatroomWindowComponent,
-    ChatroomUserListComponent,
     ProfileComponent,
-    EditProfileComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,
